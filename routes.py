@@ -15,18 +15,13 @@ def index():
 def about():
   return render_template("about.html")
 
-
-
-@app.route('/load_color_data', methods=['GET'])
-def load_color_data():
-	colors_json = {'colors': []}
-	colors = db.session.query(Color).join(Movie).all()
-	for color in colors:
-		color_info = color.__dict__
-		del color_info['_sa_instance_state']
-		colors_json['colors'].append(color_info)
-	return jsonify(colors_json)
-
+@app.route('/load_data', methods=['GET'])
+def load_data():
+    data = [{"name":"one", "value":20}, 
+            {"name":"two", "value":50}, 
+            {"name":"three", "value":30}];
+    
+    return data
 
 if __name__ == "__main__":
   app.run(debug=True)
